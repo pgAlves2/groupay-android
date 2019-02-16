@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="titlePatrol">28sp</dimen>
+    <dimen name="buttonPatrol">22sp</dimen>
+    <dimen name="textPatrol">20sp</dimen>
+    <dimen name="marginPatrol">10dp</dimen>
+
+</resources>

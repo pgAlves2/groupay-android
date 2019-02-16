@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Groupay</string>
+
+    <string name="name">Nome</string>
+    <string name="email">Email</string>
+    <string name="cpf">CPF</string>
+    <string name="phone">Telefone</string>
+    <string name="passworld">Senha</string>
+
+    <string name="userRegister">Criar conta</string>
+    <string name="register">Criar</string>
+
 </resources>
