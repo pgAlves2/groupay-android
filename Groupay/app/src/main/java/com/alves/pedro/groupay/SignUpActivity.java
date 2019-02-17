@@ -1,6 +1,7 @@
 package com.alves.pedro.groupay;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
@@ -10,10 +11,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.alves.pedro.groupay.data.APIController;
 import com.alves.pedro.groupay.model.User;
+import com.alves.pedro.groupay.utils.Utils;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -54,15 +55,15 @@ public class SignUpActivity extends AppCompatActivity {
 
         boolean valid = false;
         String error = "";
-        if (paramNotValid(mEtName))
+        if (Utils.paramNotValid(mEtName))
             error = getString(R.string.msgErrorName);
-        else if (paramNotValid(mEtEmail))
+        else if (Utils.paramNotValid(mEtEmail))
             error = getString(R.string.msgErrorEmail);
-        else if (paramNotValid(mEtCPF))
+        else if (Utils.paramNotValid(mEtCPF))
             error = getString(R.string.msgErrorCPF);
-        else if (paramNotValid(mEtPhone))
+        else if (Utils.paramNotValid(mEtPhone))
             error = getString(R.string.msgErrorTelefone);
-        else if (paramNotValid(mEtPassworld))
+        else if (Utils.paramNotValid(mEtPassworld))
             error = getString(R.string.msgErrorSenha);
         else
             valid = true;
@@ -81,10 +82,6 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-    private boolean paramNotValid(EditText editText) {
-        return (editText.getText().toString().trim().length() <= 0);
-    }
-
     private void showErrorDialog(String value) {
         if (mBuilder == null)
             mBuilder = new AlertDialog.Builder(this);
@@ -94,11 +91,11 @@ public class SignUpActivity extends AppCompatActivity {
                 .show();
     }
 
-    private void showProgressBar(){
+    private void showProgressBar() {
         mProgressBar.setVisibility(View.VISIBLE);
     }
 
-    private void hideProgressBar(){
+    private void hideProgressBar() {
         mProgressBar.setVisibility(View.INVISIBLE);
     }
 
@@ -111,7 +108,11 @@ public class SignUpActivity extends AppCompatActivity {
             switch (msg.what) {
                 case APIController.REQUEST_RESULT_OK:
                     User user = (User) msg.obj;
-                    Toast.makeText(SignUpActivity.this, user.getId(), Toast.LENGTH_SHORT).show();
+                    if (user == null)
+                        return;
+                    Intent registerCreditCardIntent = new Intent(SignUpActivity.this, RegisterCreditCardActivity.class);
+                    registerCreditCardIntent.putExtra(RegisterCreditCardActivity.USER_PARAM, user);
+                    startActivity(registerCreditCardIntent);
                     break;
                 case APIController.REQUEST_RESULT_ERROR:
                     showErrorDialog(getString(R.string.msgErrorOnRegisterUser));

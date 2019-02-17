@@ -10,86 +10,86 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginPatrol"
         android:text="@string/userRegister"
         android:textSize="@dimen/titlePatrol"
-        android:layout_marginTop="@dimen/marginPatrol"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/marginPatrol"
         android:layout_marginEnd="@dimen/marginPatrol"
-        app:layout_constraintTop_toTopOf="@id/tvTitle"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="@id/pbLoading"
-        android:orientation="vertical">
+        app:layout_constraintTop_toTopOf="@id/tvTitle">
 
         <TextView
             android:id="@+id/tvName"
-            android:text="@string/name"
-            android:textSize="@dimen/textPatrol"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@string/name"
+            android:textSize="@dimen/textPatrol" />
 
         <EditText
             android:id="@+id/etName"
-            android:textSize="@dimen/textPatrol"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textPatrol" />
 
         <TextView
             android:id="@+id/tvEmail"
-            android:text="@string/email"
-            android:textSize="@dimen/textPatrol"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@string/email"
+            android:textSize="@dimen/textPatrol" />
 
         <EditText
             android:id="@+id/etEmail"
-            android:textSize="@dimen/textPatrol"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textPatrol" />
 
         <TextView
             android:id="@+id/tvCPF"
-            android:text="@string/cpf"
-            android:textSize="@dimen/textPatrol"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@string/cpf"
+            android:textSize="@dimen/textPatrol" />
 
         <EditText
             android:id="@+id/etCPF"
-            android:textSize="@dimen/textPatrol"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textPatrol" />
 
         <TextView
             android:id="@+id/tvPhone"
-            android:text="@string/phone"
-            android:textSize="@dimen/textPatrol"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@string/phone"
+            android:textSize="@dimen/textPatrol" />
 
         <EditText
             android:id="@+id/etPhone"
-            android:textSize="@dimen/textPatrol"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textPatrol" />
 
         <TextView
             android:id="@+id/tvPassworld"
-            android:text="@string/passworld"
-            android:textSize="@dimen/textPatrol"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@string/passworld"
+            android:textSize="@dimen/textPatrol" />
 
         <EditText
             android:id="@+id/etPassworld"
-            android:textSize="@dimen/textPatrol"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textPatrol" />
 
     </LinearLayout>
 
@@ -97,18 +97,18 @@
         android:id="@+id/pbLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/btnRegister"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:indeterminate="true"
-        android:visibility="invisible"/>
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/btnRegister"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnRegister"
-        android:text="@string/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/register"
         android:textSize="@dimen/buttonPatrol"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
