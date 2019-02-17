@@ -1,10 +1,12 @@
 package com.alves.pedro.groupay;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -12,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.alves.pedro.groupay.data.APIController;
+import com.alves.pedro.groupay.model.CreditCard;
 import com.alves.pedro.groupay.model.User;
 import com.alves.pedro.groupay.utils.Utils;
 
@@ -45,6 +48,8 @@ public class RegisterCreditCardActivity extends AppCompatActivity {
         mSpinnerYear = findViewById(R.id.spinnerYear);
         mEtCVV = findViewById(R.id.etCardCVV);
 
+        mEtCardNumber.setText("4929256328394091");
+
         mBtnRegister = findViewById(R.id.btnRegister);
         mBtnRegister.setOnClickListener((v) -> registerCreditCard());
 
@@ -53,6 +58,7 @@ public class RegisterCreditCardActivity extends AppCompatActivity {
         tvUserName.setText(mUser.getName());
     }
 
+    @SuppressLint("DefaultLocale")
     private void registerCreditCard() {
         mBtnRegister.setEnabled(false);
 
@@ -72,8 +78,12 @@ public class RegisterCreditCardActivity extends AppCompatActivity {
 
         if (valid) {
             Utils.showProgressBar(mProgressBar);
-
-//            APIController.getInstance().registerCreditCard(creditCar, mUser, this, mHandler);
+            CreditCard creditCard = new CreditCard(mEtCardName.getText().toString(),
+                                                   mEtCardNumber.getText().toString(),
+                                                   String.format("%02d", Integer.valueOf((String) mSpinnerMonth.getSelectedItem())),
+                                                   (String) mSpinnerYear.getSelectedItem(),
+                                                    mEtCVV.getText().toString());
+            APIController.getInstance().registerCreditCard(creditCard, mUser, this, mHandler);
         } else {
             Utils.showErrorDialog(error, this);
             mBtnRegister.setEnabled(true);
@@ -88,10 +98,10 @@ public class RegisterCreditCardActivity extends AppCompatActivity {
             Utils.hideProgressBar(mProgressBar);
             switch (msg.what) {
                 case APIController.REQUEST_RESULT_OK:
-
+                    Log.e("TEST", "SUCCESS");
                     break;
                 case APIController.REQUEST_RESULT_ERROR:
-
+                    Log.e("TEST", "ERROR");
                     break;
                 default:
                     break;

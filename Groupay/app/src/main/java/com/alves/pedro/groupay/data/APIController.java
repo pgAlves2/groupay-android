@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import com.alves.pedro.groupay.model.CreditCard;
 import com.alves.pedro.groupay.model.User;
 import com.alves.pedro.groupay.utils.GsonUtils;
 import com.android.volley.Request;
@@ -21,6 +22,8 @@ public class APIController {
 
     private static final String API_URL = "http://b95d3955.ngrok.io/api/";
     private static final String USERS = "users/";
+    private static final String CARDS = "cards/";
+    private static final String ASSOCIATE = "associate/";
     private static final String CREATE = "create";
 
     public static final int REQUEST_RESULT_OK = 1;
@@ -51,12 +54,32 @@ public class APIController {
                 return userJson.getBytes();
             }
 
+            @Override
+            public Map<String, String> getHeaders() {
+                return getHeadersParam();
+            }
+        };
+        queue.add(postRequest);
+    }
+
+    public void registerCreditCard(CreditCard creditCard, User user, Context context, Handler handler) {
+        if (user == null || user.getId() == null)
+            return;
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest postRequest = new StringRequest(Request.Method.POST, API_URL + CARDS + ASSOCIATE + user.getId(),
+                response -> handleSuccessMessage(handler, null),
+                error -> handleErrorMessage(handler)
+        ) {
+            @Override
+            public byte[] getBody() {
+                String userJson = GsonUtils.getInstance().toJson(creditCard);
+                Log.e("POST", userJson);
+                return userJson.getBytes();
+            }
 
             @Override
             public Map<String, String> getHeaders() {
-                HashMap<String, String> headers = new HashMap<>();
-                headers.put("Content-Type", "application/json; charset=utf-8");
-                return headers;
+                return getHeadersParam();
             }
         };
         queue.add(postRequest);
@@ -73,6 +96,12 @@ public class APIController {
         Message message = new Message();
         message.what = REQUEST_RESULT_ERROR;
         handler.handleMessage(message);
+    }
+
+    private HashMap<String, String> getHeadersParam() {
+        HashMap<String, String> headers = new HashMap<>();
+        headers.put("Content-Type", "application/json; charset=utf-8");
+        return headers;
     }
 
 

@@ -4,10 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -25,8 +23,6 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText mEtPassworld;
     private Button mBtnRegister;
     private ProgressBar mProgressBar;
-
-    private AlertDialog.Builder mBuilder;
 
     private UserRegisterHandler mHandler;
 
@@ -69,7 +65,7 @@ public class SignUpActivity extends AppCompatActivity {
             valid = true;
 
         if (valid) {
-            showProgressBar();
+            Utils.showProgressBar(mProgressBar);
             User user = new User(mEtName.getText().toString(),
                     mEtEmail.getText().toString(),
                     mEtCPF.getText().toString(),
@@ -77,26 +73,9 @@ public class SignUpActivity extends AppCompatActivity {
                     mEtPassworld.getText().toString());
             APIController.getInstance().registerUser(user, this, mHandler);
         } else {
-            showErrorDialog(error);
+            Utils.showErrorDialog(error, this);
             mBtnRegister.setEnabled(true);
         }
-    }
-
-    private void showErrorDialog(String value) {
-        if (mBuilder == null)
-            mBuilder = new AlertDialog.Builder(this);
-        mBuilder.setMessage(value)
-                .setPositiveButton(R.string.msgOk, (dialog, id) -> dialog.dismiss())
-                .create()
-                .show();
-    }
-
-    private void showProgressBar() {
-        mProgressBar.setVisibility(View.VISIBLE);
-    }
-
-    private void hideProgressBar() {
-        mProgressBar.setVisibility(View.INVISIBLE);
     }
 
     @SuppressLint("HandlerLeak")
@@ -104,7 +83,7 @@ public class SignUpActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            hideProgressBar();
+            Utils.hideProgressBar(mProgressBar);
             switch (msg.what) {
                 case APIController.REQUEST_RESULT_OK:
                     User user = (User) msg.obj;
@@ -115,7 +94,7 @@ public class SignUpActivity extends AppCompatActivity {
                     startActivity(registerCreditCardIntent);
                     break;
                 case APIController.REQUEST_RESULT_ERROR:
-                    showErrorDialog(getString(R.string.msgErrorOnRegisterUser));
+                    Utils.showErrorDialog(getString(R.string.msgErrorOnRegisterUser), SignUpActivity.this);
                     break;
                 default:
                     break;
