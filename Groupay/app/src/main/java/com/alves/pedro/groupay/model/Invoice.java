@@ -35,6 +35,9 @@ public class Invoice implements Serializable {
     @SerializedName("groupId")
     private String mGroupID;
 
+    @SerializedName("userId")
+    private String mUserID;
+
     @SerializedName("splitPayments")
     private List<Split> mSplitList;
 
@@ -131,6 +134,14 @@ public class Invoice implements Serializable {
 
     public void setSplitList(List<Split> splitList) {
         mSplitList = splitList;
+    }
+
+    public String getUserID() {
+        return mUserID;
+    }
+
+    public void setUserID(String userID) {
+        mUserID = userID;
     }
 
     @Override

@@ -31,6 +31,7 @@ public class InvoiceActivity extends AppCompatActivity {
     private TextView mTvInvoiceName;
     private TextView mTvInvoiceDateValue;
     private TextView mTvStatusValue;
+    private TextView mTvValueValue;
     private ProgressBar mProgressBar;
     private Button mBtnDivideInvoice;
     private Button mBtnPayInvoice;
@@ -61,6 +62,7 @@ public class InvoiceActivity extends AppCompatActivity {
         mTvInvoiceName = findViewById(R.id.tvInvoiceName);
         mTvInvoiceDateValue = findViewById(R.id.tvInvoiceDateValue);
         mTvStatusValue = findViewById(R.id.tvStatusValue);
+        mTvValueValue = findViewById(R.id.tvValueValue);
 
         mProgressBar = findViewById(R.id.pbLoading);
         mBtnDivideInvoice = findViewById(R.id.btnDivideInvoice);
@@ -133,13 +135,20 @@ public class InvoiceActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void loadData() {
         mTvInvoiceName.setText(mInvoice.getName());
         mTvInvoiceDateValue.setText(Utils.getReadableDate(mInvoice.getDueDate()));
         mTvStatusValue.setText(mInvoice.isPaid() ? getString(R.string.paid) : getString(R.string.notPaid));
+        mTvValueValue.setText("R$ " + String.valueOf(mInvoice.getValue()));
         if (mInvoice.getGroupID() == null) {
-            mBtnDivideInvoice.setVisibility(View.VISIBLE);
-            mBtnPayInvoice.setVisibility(View.VISIBLE);
+            if (!mInvoice.isPaid()) {
+                mBtnDivideInvoice.setVisibility(View.VISIBLE);
+                mBtnPayInvoice.setVisibility(View.VISIBLE);
+            } else {
+                mBtnDivideInvoice.setVisibility(View.GONE);
+                mBtnPayInvoice.setVisibility(View.GONE);
+            }
             mBtnManagePayments.setVisibility(View.GONE);
         } else {
             mBtnDivideInvoice.setVisibility(View.GONE);

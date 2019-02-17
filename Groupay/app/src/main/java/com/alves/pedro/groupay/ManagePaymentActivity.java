@@ -5,7 +5,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -59,6 +61,8 @@ public class ManagePaymentActivity extends AppCompatActivity {
 
         mProgressBar = findViewById(R.id.pbLoading);
         mRvSplits = findViewById(R.id.rvSplits);
+        RecyclerView.LayoutManager layoutRvGroups = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mRvSplits.setLayoutManager(layoutRvGroups);
         mBtnPay = findViewById(R.id.btnPay);
         mBtnPay.setOnClickListener(v -> {
             Utils.showProgressBar(mProgressBar);
@@ -108,6 +112,10 @@ public class ManagePaymentActivity extends AppCompatActivity {
                             Utils.hideProgressBar(mProgressBar);
                             return;
                         }
+
+                        if (mInvoice.isPaid())
+                            finish();
+
                         mSplitAtual = mInvoice.getSplitList().get(0);
                         APIController.getInstance().getUser(mSplitAtual.getUserId(), ManagePaymentActivity.this, mHandler);
                     }
@@ -128,7 +136,9 @@ public class ManagePaymentActivity extends AppCompatActivity {
         boolean showPayButton = true;
         for (Split split : mInvoice.getSplitList())
             showPayButton = showPayButton && split.isPaid();
-        mBtnPay.setVisibility(showPayButton ? View.VISIBLE : View.GONE);
+
+        boolean isOwner = mUser.getId().equals(mInvoice.getUserID());
+        mBtnPay.setVisibility(showPayButton && isOwner? View.VISIBLE : View.GONE);
     }
 
     private void askInvoiceData() {

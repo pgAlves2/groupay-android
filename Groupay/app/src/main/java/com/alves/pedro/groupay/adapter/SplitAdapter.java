@@ -1,5 +1,6 @@
 package com.alves.pedro.groupay.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -34,10 +35,12 @@ public class SplitAdapter extends RecyclerView.Adapter<SplitAdapter.SplitViewHol
         return new SplitViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull SplitViewHolder holder, int position) {
         Split split = mSplitList.get(position);
         holder.userName.setText(split.getUser().getName());
+        holder.userValue.setText("R$ " + String.valueOf(split.getValue()));
         holder.paid.setChecked(split.isPaid());
     }
 
@@ -52,11 +55,13 @@ public class SplitAdapter extends RecyclerView.Adapter<SplitAdapter.SplitViewHol
 
     public class SplitViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         final TextView userName;
+        final TextView userValue;
         final CheckBox paid;
 
         SplitViewHolder(View view) {
             super(view);
             userName = view.findViewById(R.id.tvItemName);
+            userValue = view.findViewById(R.id.tvItemValue);
             paid = view.findViewById(R.id.cbItemSelected);
             view.setOnClickListener(this);
         }

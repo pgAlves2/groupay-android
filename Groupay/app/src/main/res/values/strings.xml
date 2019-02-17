@@ -19,6 +19,7 @@
 
     <string name="dueDate">Data de vencimento</string>
     <string name="status">Status</string>
+    <string name="value">Valor</string>
     <string name="paid">Pago</string>
     <string name="notPaid">Não pago</string>
 
@@ -28,7 +29,7 @@
 
     <string name="divideInvoice">Dividir conta</string>
     <string name="payInvoice">Pagar conta</string>
-    <string name="managePayment">Gerenciar o pagamento</string>
+    <string name="managePayment">Visualizar o pagamento</string>
 
     <string name="members">Membros</string>
 

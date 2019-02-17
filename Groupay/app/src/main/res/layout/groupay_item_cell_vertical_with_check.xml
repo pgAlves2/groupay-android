@@ -33,6 +33,14 @@
                 android:textSize="@dimen/textPatrol"
                 android:textStyle="italic" />
 
+            <TextView
+                android:id="@+id/tvItemValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="textEnd"
+                android:textSize="@dimen/textPatrol"
+                android:textStyle="italic"/>
+
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
