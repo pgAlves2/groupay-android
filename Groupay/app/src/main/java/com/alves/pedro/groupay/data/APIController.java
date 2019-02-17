@@ -85,6 +85,27 @@ public class APIController {
         queue.add(postRequest);
     }
 
+    public void getFullUser(User user, Context context, Handler handler) {
+        if (user == null || user.getId() == null)
+            return;
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest getRequest = new StringRequest(Request.Method.GET, API_URL + USERS + user.getId(),
+                response -> {
+                    User userResult = GsonUtils.getInstance()
+                            .fromJson(new String(response.getBytes()), User.class);
+                    handleSuccessMessage(handler, userResult);
+                    handleSuccessMessage(handler, userResult);
+                },
+                error -> handleErrorMessage(handler)
+        ) {
+            @Override
+            public Map<String, String> getHeaders() {
+                return getHeadersParam();
+            }
+        };
+        queue.add(getRequest);
+    }
+
     private void handleSuccessMessage(Handler handler, Object obj) {
         Message message = new Message();
         message.what = REQUEST_RESULT_OK;
@@ -104,25 +125,4 @@ public class APIController {
         return headers;
     }
 
-
-//    RequestQueue queue = Volley.newRequestQueue(this);
-//    String url ="http://www.google.com";
-//
-//    // Request a string response from the provided URL.
-//    StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-//            new Response.Listener<String>() {
-//                @Override
-//                public void onResponse(String response) {
-//                    // Display the first 500 characters of the response string.
-//                    mTextView.setText("Response is: "+ response.substring(0,500));
-//                }
-//            }, new Response.ErrorListener() {
-//        @Override
-//        public void onErrorResponse(VolleyError error) {
-//            mTextView.setText("That didn't work!");
-//        }
-//    });
-//
-//// Add the request to the RequestQueue.
-//queue.add(stringRequest);
 }

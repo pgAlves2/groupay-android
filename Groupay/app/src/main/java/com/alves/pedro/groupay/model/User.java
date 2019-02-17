@@ -3,6 +3,7 @@ package com.alves.pedro.groupay.model;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 public class User implements Serializable {
@@ -24,6 +25,18 @@ public class User implements Serializable {
 
     @SerializedName("passworld")
     private String mPassworld;
+
+    @SerializedName("balance")
+    private String mBalance;
+
+    @SerializedName("groups")
+    private List<Group> mGroupList;
+
+    @SerializedName("invoices")
+    private List<Group> myInvoiceList;
+
+    @SerializedName("groupInvoices")
+    private List<Group> linkedInvoiceList;
 
     private transient CreditCard mCreditCard;
 
@@ -86,12 +99,44 @@ public class User implements Serializable {
         mName = name;
     }
 
+    public String getBalance() {
+        return mBalance;
+    }
+
+    public void setBalance(String balance) {
+        mBalance = balance;
+    }
+
     public CreditCard getCreditCard() {
         return mCreditCard;
     }
 
     public void setCreditCard(CreditCard creditCard) {
         mCreditCard = creditCard;
+    }
+
+    public List<Group> getGroupList() {
+        return mGroupList;
+    }
+
+    public void setGroupList(List<Group> groupList) {
+        mGroupList = groupList;
+    }
+
+    public List<Group> getMyInvoiceList() {
+        return myInvoiceList;
+    }
+
+    public void setMyInvoiceList(List<Group> myInvoiceList) {
+        this.myInvoiceList = myInvoiceList;
+    }
+
+    public List<Group> getLinkedInvoiceList() {
+        return linkedInvoiceList;
+    }
+
+    public void setLinkedInvoiceList(List<Group> linkedInvoiceList) {
+        this.linkedInvoiceList = linkedInvoiceList;
     }
 
     @Override

@@ -109,7 +109,7 @@ public class RegisterCreditCardActivity extends AppCompatActivity {
                     startActivity(dashBoardIntent);
                     break;
                 case APIController.REQUEST_RESULT_ERROR:
-                    Utils.showErrorDialog(getString(R.string.msgErrorOnRegisterUser), RegisterCreditCardActivity.this);
+                    Utils.showErrorDialog(getString(R.string.msgErrorOnRegisterCreditCard), RegisterCreditCardActivity.this);
                     break;
                 default:
                     break;

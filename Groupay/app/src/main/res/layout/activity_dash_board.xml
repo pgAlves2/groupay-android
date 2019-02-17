@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".DashBoardActivity">
 
+    <ProgressBar
+        android:id="@+id/pbLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <TextView
         android:id="@+id/tvUserName"
         android:layout_width="wrap_content"
@@ -24,7 +33,6 @@
         android:layout_marginStart="@dimen/marginPatrol"
         android:layout_marginEnd="@dimen/marginPatrol"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@id/pbLoading"
         app:layout_constraintTop_toBottomOf="@id/tvUserName">
 
         <TextView
@@ -43,6 +51,13 @@
 
     </LinearLayout>
 
+    <View
+        android:id="@+id/divider1"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintTop_toBottomOf="@id/llBalance"/>
+
     <TextView
         android:id="@+id/tvGroups"
         android:layout_width="match_parent"
@@ -51,13 +66,20 @@
         android:layout_marginEnd="@dimen/marginPatrol"
         android:text="@string/groups"
         android:textSize="@dimen/textPatrol"
-        app:layout_constraintTop_toBottomOf="@+id/llBalance" />
+        app:layout_constraintTop_toBottomOf="@+id/divider1" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvGrupos"
+        android:id="@+id/rvGroups"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/tvGroups" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintTop_toBottomOf="@id/rvGroups"/>
 
     <TextView
         android:id="@+id/tvMyInvoices"
@@ -68,13 +90,20 @@
         android:layout_marginEnd="@dimen/marginPatrol"
         android:text="@string/myInvoices"
         android:textSize="@dimen/textPatrol"
-        app:layout_constraintTop_toBottomOf="@+id/rvGrupos" />
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvMyInvoices"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/tvMyInvoices" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintTop_toBottomOf="@id/rvMyInvoices"/>
 
     <TextView
         android:id="@+id/tvLinkedInvoices"
@@ -85,7 +114,7 @@
         android:layout_marginEnd="@dimen/marginPatrol"
         android:text="@string/likedInvoices"
         android:textSize="@dimen/textPatrol"
-        app:layout_constraintTop_toBottomOf="@+id/rvMyInvoices" />
+        app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvLinkedInvoices"

@@ -27,6 +27,8 @@
     <string name="msgErrorTelefone">Telefone inválido</string>
     <string name="msgErrorSenha">Senha inválido</string>
     <string name="msgErrorOnRegisterUser">Erro ao registrar o usuário</string>
+    <string name="msgErrorOnRegisterCreditCard">Erro ao registrar o cartão de crédito.</string>
+    <string name="msgErrorOnGetUserData">Erro ao recuperar os dados do usuário</string>
     <string name="msgErrorNumberCard">Número inválido</string>
     <string name="msgErrorNameCard">Nome inválido</string>
     <string name="msgErrorCVVCard">CVV inválido</string>
