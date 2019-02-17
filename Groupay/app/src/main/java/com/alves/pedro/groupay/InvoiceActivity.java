@@ -1,5 +1,6 @@
 package com.alves.pedro.groupay;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -45,6 +46,11 @@ public class InvoiceActivity extends AppCompatActivity {
 
         if (mInvoice.getGroupID() == null) {
             Button btnDivideInvoice = findViewById(R.id.btnDivideInvoice);
+            btnDivideInvoice.setOnClickListener(v -> {
+                Intent groupListIntent = new Intent(this, GroupListActivity.class);
+                groupListIntent.putExtra(GroupListActivity.USER_PARAM, mUser);
+                startActivity(groupListIntent);
+            });
             btnDivideInvoice.setVisibility(View.VISIBLE);
         }
     }

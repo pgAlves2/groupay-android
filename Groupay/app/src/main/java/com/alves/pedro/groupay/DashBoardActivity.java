@@ -132,7 +132,7 @@ public class DashBoardActivity extends AppCompatActivity {
         mTvUserName.setText(mUser.getName());
         mTvBalanceValue.setText(mUser.getBalance());
 
-        GroupAdapter groupAdapter = new GroupAdapter(mUser.getGroupList(), this);
+        GroupAdapter groupAdapter = new GroupAdapter(mUser.getGroupList(), this, true);
         groupAdapter.setClickListener((view, position) -> {
 
         });

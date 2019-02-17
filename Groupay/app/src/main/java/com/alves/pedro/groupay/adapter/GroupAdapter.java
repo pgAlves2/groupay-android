@@ -21,15 +21,18 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
 
     private ItemClickListener clickListener;
 
-    public GroupAdapter(List<Group> groups, Context context) {
+    private boolean mHorizontal;
+
+    public GroupAdapter(List<Group> groups, Context context, boolean horizontal) {
         this.mGroupList = groups;
         this.context = context;
+        this.mHorizontal = horizontal;
     }
 
     @NonNull
     @Override
     public GroupViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.groupay_item_cell, parent, false);
+        View view = LayoutInflater.from(context).inflate(mHorizontal ? R.layout.groupay_item_cell : R.layout.groupay_item_cell_vertical, parent, false);
         return new GroupViewHolder(view);
     }
 
