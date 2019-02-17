@@ -47,6 +47,7 @@ public class RegisterCreditCardActivity extends AppCompatActivity {
         mSpinnerMonth = findViewById(R.id.spinnerMonth);
         mSpinnerYear = findViewById(R.id.spinnerYear);
         mEtCVV = findViewById(R.id.etCardCVV);
+        mProgressBar = findViewById(R.id.pbLoading);
 
         mEtCardNumber.setText("4929256328394091");
 
@@ -79,10 +80,10 @@ public class RegisterCreditCardActivity extends AppCompatActivity {
         if (valid) {
             Utils.showProgressBar(mProgressBar);
             CreditCard creditCard = new CreditCard(mEtCardName.getText().toString(),
-                                                   mEtCardNumber.getText().toString(),
-                                                   String.format("%02d", Integer.valueOf((String) mSpinnerMonth.getSelectedItem())),
-                                                   (String) mSpinnerYear.getSelectedItem(),
-                                                    mEtCVV.getText().toString());
+                    mEtCardNumber.getText().toString(),
+                    String.format("%02d", Integer.valueOf((String) mSpinnerMonth.getSelectedItem())),
+                    (String) mSpinnerYear.getSelectedItem(),
+                    mEtCVV.getText().toString());
             APIController.getInstance().registerCreditCard(creditCard, mUser, this, mHandler);
         } else {
             Utils.showErrorDialog(error, this);
@@ -98,10 +99,8 @@ public class RegisterCreditCardActivity extends AppCompatActivity {
             Utils.hideProgressBar(mProgressBar);
             switch (msg.what) {
                 case APIController.REQUEST_RESULT_OK:
-                    Log.e("TEST", "SUCCESS");
                     break;
                 case APIController.REQUEST_RESULT_ERROR:
-                    Log.e("TEST", "ERROR");
                     break;
                 default:
                     break;
