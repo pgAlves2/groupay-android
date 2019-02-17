@@ -27,8 +27,12 @@ public class InvoiceActivity extends AppCompatActivity {
 
     private static final int REQUEST_GROUP = 1;
 
+    private TextView mTvInvoiceName;
+    private TextView mTvInvoiceDateValue;
+    private TextView mTvStatusValue;
     private ProgressBar mProgressBar;
     private Button mBtnDivideInvoice;
+    private Button mBtnPayInvoice;
 
     private User mUser;
 
@@ -41,6 +45,8 @@ public class InvoiceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invoice);
 
+        mHandler = new InvoiceRegisterHandler();
+
         if (!getIntent().hasExtra(INVOICE_PARAM))
             return;
 
@@ -50,27 +56,25 @@ public class InvoiceActivity extends AppCompatActivity {
         mInvoice = (Invoice) getIntent().getSerializableExtra(INVOICE_PARAM);
         mUser = (User) getIntent().getSerializableExtra(USER_PARAM);
 
-        TextView tvInvoiceName = findViewById(R.id.tvInvoiceName);
-        tvInvoiceName.setText(mInvoice.getName());
-
-        TextView tvInvoiceDateValue = findViewById(R.id.tvInvoiceDateValue);
-        tvInvoiceDateValue.setText(Utils.getReadableDate(mInvoice.getDueDate()));
-
-        TextView tvStatusValue = findViewById(R.id.tvStatusValue);
-        tvStatusValue.setText(mInvoice.isPaid() ? getString(R.string.paid) : getString(R.string.notPaid));
+        mTvInvoiceName = findViewById(R.id.tvInvoiceName);
+        mTvInvoiceDateValue = findViewById(R.id.tvInvoiceDateValue);
+        mTvStatusValue = findViewById(R.id.tvStatusValue);
 
         mProgressBar = findViewById(R.id.pbLoading);
-
         mBtnDivideInvoice = findViewById(R.id.btnDivideInvoice);
+        mBtnPayInvoice = findViewById(R.id.btnPayInvoice);
+        mBtnDivideInvoice.setOnClickListener(v -> {
+            Intent groupListIntent = new Intent(this, GroupListActivity.class);
+            groupListIntent.putExtra(GroupListActivity.USER_PARAM, mUser);
+            startActivityForResult(groupListIntent, REQUEST_GROUP);
+        });
+        loadData();
 
-        if (mInvoice.getGroupID() == null) {
-            mBtnDivideInvoice.setOnClickListener(v -> {
-                Intent groupListIntent = new Intent(this, GroupListActivity.class);
-                groupListIntent.putExtra(GroupListActivity.USER_PARAM, mUser);
-                startActivityForResult(groupListIntent, REQUEST_GROUP);
-            });
-            mBtnDivideInvoice.setVisibility(View.VISIBLE);
-        }
+        mBtnPayInvoice.setOnClickListener(v -> {
+            Utils.showProgressBar(mProgressBar);
+            mBtnPayInvoice.setEnabled(false);
+            APIController.getInstance().payInvoiceCard(mInvoice, mUser, this, mHandler);
+        });
     }
 
     @Override
@@ -79,9 +83,6 @@ public class InvoiceActivity extends AppCompatActivity {
             return;
         if (requestCode == REQUEST_GROUP && resultCode == RESULT_OK) {
             if (data.hasExtra(GroupListActivity.GROUP_OUT_PARAM)) {
-                if (mHandler == null)
-                    mHandler = new InvoiceRegisterHandler();
-
                 Utils.showProgressBar(mProgressBar);
 
                 Group group = (Group) data.getSerializableExtra(GroupListActivity.GROUP_OUT_PARAM);
@@ -97,15 +98,36 @@ public class InvoiceActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             Utils.hideProgressBar(mProgressBar);
+            mBtnPayInvoice.setEnabled(true);
             switch (msg.what) {
                 case APIController.REQUEST_RESULT_OK:
-                    mBtnDivideInvoice.setVisibility(View.INVISIBLE);
+                    if (msg.obj == null) {
+                        APIController.getInstance().getInvoice(mInvoice, InvoiceActivity.this, mHandler);
+                        Log.e("t", "null");
+                    }else {
+                        mInvoice = (Invoice) msg.obj;
+                        Log.e("t", mInvoice.getName());
+                        loadData();
+                    }
                     break;
                 case APIController.REQUEST_RESULT_ERROR:
                     break;
                 default:
                     break;
             }
+        }
+    }
+
+    private void loadData() {
+        mTvInvoiceName.setText(mInvoice.getName());
+        mTvInvoiceDateValue.setText(Utils.getReadableDate(mInvoice.getDueDate()));
+        mTvStatusValue.setText(mInvoice.isPaid() ? getString(R.string.paid) : getString(R.string.notPaid));
+        if (mInvoice.getGroupID() == null) {
+            mBtnDivideInvoice.setVisibility(View.VISIBLE);
+            mBtnPayInvoice.setVisibility(View.VISIBLE);
+        }else {
+            mBtnDivideInvoice.setVisibility(View.GONE);
+            mBtnPayInvoice.setVisibility(View.GONE);
         }
     }
 }

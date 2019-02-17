@@ -23,8 +23,10 @@ public class APIController {
 
     private static final String API_URL = "http://b95d3955.ngrok.io/api/";
     private static final String USERS = "users/";
+    private static final String USER = "user/";
     private static final String INVOICES = "invoices/";
     private static final String CARDS = "cards/";
+    private static final String PAYMENT = "payment/";
     private static final String ASSOCIATE = "associate/";
     private static final String CREATE = "create";
 
@@ -96,7 +98,26 @@ public class APIController {
                     User userResult = GsonUtils.getInstance()
                             .fromJson(new String(response.getBytes()), User.class);
                     handleSuccessMessage(handler, userResult);
-                    handleSuccessMessage(handler, userResult);
+                },
+                error -> handleErrorMessage(handler)
+        ) {
+            @Override
+            public Map<String, String> getHeaders() {
+                return getHeadersParam();
+            }
+        };
+        queue.add(getRequest);
+    }
+
+    public void getInvoice(Invoice invoice, Context context, Handler handler) {
+        if (invoice == null || invoice.getId() == null)
+            return;
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest getRequest = new StringRequest(Request.Method.GET, API_URL + INVOICES + invoice.getId(),
+                response -> {
+                    Invoice invoiceResult = GsonUtils.getInstance()
+                            .fromJson(new String(response.getBytes()), Invoice.class);
+                    handleSuccessMessage(handler, invoiceResult);
                 },
                 error -> handleErrorMessage(handler)
         ) {
@@ -113,7 +134,7 @@ public class APIController {
             return;
         RequestQueue queue = Volley.newRequestQueue(context);
         StringRequest postRequest = new StringRequest(Request.Method.PUT, API_URL + INVOICES + invoice.getId(),
-                response -> handleSuccessMessage(handler, invoice),
+                response -> handleSuccessMessage(handler, null),
                 error -> handleErrorMessage(handler)
         ) {
             @Override
@@ -123,6 +144,25 @@ public class APIController {
                 return userJson.getBytes();
             }
 
+            @Override
+            public Map<String, String> getHeaders() {
+                return getHeadersParam();
+            }
+        };
+        queue.add(postRequest);
+    }
+
+    public void payInvoiceCard(Invoice invoice, User user, Context context, Handler handler) {
+        if (user == null || user.getId() == null)
+            return;
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest postRequest = new StringRequest(Request.Method.POST, API_URL
+                + INVOICES + invoice.getId() + "/"
+                + USER + user.getId() + "/"
+                + PAYMENT,
+                response -> handleSuccessMessage(handler, invoice),
+                error -> handleErrorMessage(handler)
+        ) {
             @Override
             public Map<String, String> getHeaders() {
                 return getHeadersParam();
