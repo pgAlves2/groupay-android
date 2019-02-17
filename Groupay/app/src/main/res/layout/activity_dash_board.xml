@@ -17,4 +17,82 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:id="@+id/llBalance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginPatrol"
+        android:layout_marginEnd="@dimen/marginPatrol"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/pbLoading"
+        app:layout_constraintTop_toBottomOf="@id/tvUserName">
+
+        <TextView
+            android:id="@+id/tvBalance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/balance"
+            android:textSize="@dimen/textPatrol" />
+
+        <TextView
+            android:id="@+id/tvBalanceValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textPatrol"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvGroups"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginPatrol"
+        android:layout_marginEnd="@dimen/marginPatrol"
+        android:text="@string/groups"
+        android:textSize="@dimen/textPatrol"
+        app:layout_constraintTop_toBottomOf="@+id/llBalance" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvGrupos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvGroups" />
+
+    <TextView
+        android:id="@+id/tvMyInvoices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginPatrol"
+        android:layout_marginTop="@dimen/marginPatrol"
+        android:layout_marginEnd="@dimen/marginPatrol"
+        android:text="@string/myInvoices"
+        android:textSize="@dimen/textPatrol"
+        app:layout_constraintTop_toBottomOf="@+id/rvGrupos" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvMyInvoices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tvMyInvoices" />
+
+    <TextView
+        android:id="@+id/tvLinkedInvoices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginPatrol"
+        android:layout_marginTop="@dimen/marginPatrol"
+        android:layout_marginEnd="@dimen/marginPatrol"
+        android:text="@string/likedInvoices"
+        android:textSize="@dimen/textPatrol"
+        app:layout_constraintTop_toBottomOf="@+id/rvMyInvoices" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvLinkedInvoices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tvLinkedInvoices">
+
+    </android.support.v7.widget.RecyclerView>
+
 </android.support.constraint.ConstraintLayout>
