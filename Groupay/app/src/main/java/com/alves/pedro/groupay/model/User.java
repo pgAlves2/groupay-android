@@ -7,6 +7,9 @@ import java.util.Objects;
 
 public class User implements Serializable {
 
+    @SerializedName("id")
+    private String mId;
+
     @SerializedName("name")
     private String mName;
 
@@ -31,6 +34,14 @@ public class User implements Serializable {
         mCPF = CPF;
         mPhone = phone;
         mPassworld = passworld;
+    }
+
+    public String getId() {
+        return mId;
+    }
+
+    public void setId(String id) {
+        mId = id;
     }
 
     public String getCPF() {
@@ -78,11 +89,11 @@ public class User implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(mCPF, user.mCPF);
+        return Objects.equals(mId, user.mId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mCPF);
+        return Objects.hash(mId);
     }
 }

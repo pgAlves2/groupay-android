@@ -37,7 +37,11 @@ public class APIController {
             return;
         RequestQueue queue = Volley.newRequestQueue(context);
         StringRequest postRequest = new StringRequest(Request.Method.POST, API_URL + USERS + CREATE,
-                response -> handleSuccessMessage(handler),
+                response -> {
+                    User userResult = GsonUtils.getInstance()
+                                                .fromJson(new String(response.getBytes()), User.class);
+                    handleSuccessMessage(handler, userResult);
+                },
                 error -> {
                     Log.e("erro", "errpor");
                     handleErrorMessage(handler);
@@ -61,9 +65,10 @@ public class APIController {
         queue.add(postRequest);
     }
 
-    private void handleSuccessMessage(Handler handler) {
+    private void handleSuccessMessage(Handler handler, Object obj) {
         Message message = new Message();
         message.what = REQUEST_RESULT_OK;
+        message.obj = obj;
         handler.handleMessage(message);
     }
 

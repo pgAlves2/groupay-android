@@ -1,6 +1,6 @@
 package com.alves.pedro.groupay;
 
-import android.content.DialogInterface;
+import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
@@ -94,13 +94,15 @@ public class SignUpActivity extends AppCompatActivity {
                 .show();
     }
 
+    @SuppressLint("HandlerLeak")
     class UserRegisterHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
                 case APIController.REQUEST_RESULT_OK:
-                    Toast.makeText(SignUpActivity.this, "SUCESSO", Toast.LENGTH_SHORT).show();
+                    User user = (User) msg.obj;
+                    Toast.makeText(SignUpActivity.this, user.getId(), Toast.LENGTH_SHORT).show();
                     break;
                 case APIController.REQUEST_RESULT_ERROR:
                     showErrorDialog(getString(R.string.msgErrorOnRegisterUser));
