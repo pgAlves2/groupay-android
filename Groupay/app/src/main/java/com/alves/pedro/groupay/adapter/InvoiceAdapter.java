@@ -9,51 +9,51 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.alves.pedro.groupay.R;
-import com.alves.pedro.groupay.model.Group;
+import com.alves.pedro.groupay.model.Invoice;
 
 import java.util.List;
 
-public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHolder> {
+public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.InvoiceViewHolder> {
 
-    private List<Group> mGroupList;
+    private List<Invoice> mInvoiceList;
 
     private Context context;
 
     private ItemClickListener clickListener;
 
-    public GroupAdapter(List<Group> groups, Context context) {
-        this.mGroupList = groups;
+    public InvoiceAdapter(List<Invoice> invoices, Context context) {
+        this.mInvoiceList = invoices;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public GroupViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public InvoiceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.groupay_item_cell, parent, false);
-        return new GroupViewHolder(view);
+        return new InvoiceViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GroupViewHolder holder, int position) {
-        Group group = mGroupList.get(position);
-        holder.groupName.setText(group.getName());
+    public void onBindViewHolder(@NonNull InvoiceViewHolder holder, int position) {
+        Invoice invoice = mInvoiceList.get(position);
+        holder.invoiceName.setText(invoice.getName());
     }
 
     @Override
     public int getItemCount() {
-        return mGroupList.size();
+        return mInvoiceList.size();
     }
 
     public void setClickListener(ItemClickListener itemClickListener) {
         this.clickListener = itemClickListener;
     }
 
-    public class GroupViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        final TextView groupName;
+    public class InvoiceViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        final TextView invoiceName;
 
-        GroupViewHolder(View view) {
+        InvoiceViewHolder(View view) {
             super(view);
-            groupName = view.findViewById(R.id.tvItemName);
+            invoiceName = view.findViewById(R.id.tvItemName);
             view.setOnClickListener(this);
         }
 

@@ -33,10 +33,10 @@ public class User implements Serializable {
     private List<Group> mGroupList;
 
     @SerializedName("invoices")
-    private List<Group> myInvoiceList;
+    private List<Invoice> myInvoiceList;
 
     @SerializedName("groupInvoices")
-    private List<Group> linkedInvoiceList;
+    private List<Invoice> linkedInvoiceList;
 
     private transient CreditCard mCreditCard;
 
@@ -123,19 +123,19 @@ public class User implements Serializable {
         mGroupList = groupList;
     }
 
-    public List<Group> getMyInvoiceList() {
+    public List<Invoice> getMyInvoiceList() {
         return myInvoiceList;
     }
 
-    public void setMyInvoiceList(List<Group> myInvoiceList) {
+    public void setMyInvoiceList(List<Invoice> myInvoiceList) {
         this.myInvoiceList = myInvoiceList;
     }
 
-    public List<Group> getLinkedInvoiceList() {
+    public List<Invoice> getLinkedInvoiceList() {
         return linkedInvoiceList;
     }
 
-    public void setLinkedInvoiceList(List<Group> linkedInvoiceList) {
+    public void setLinkedInvoiceList(List<Invoice> linkedInvoiceList) {
         this.linkedInvoiceList = linkedInvoiceList;
     }
 

@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.alves.pedro.groupay.adapter.GroupAdapter;
+import com.alves.pedro.groupay.adapter.InvoiceAdapter;
 import com.alves.pedro.groupay.data.APIController;
 import com.alves.pedro.groupay.model.CreditCard;
 import com.alves.pedro.groupay.model.User;
@@ -26,6 +27,8 @@ public class DashBoardActivity extends AppCompatActivity {
     private TextView mTvUserName;
     private TextView mTvBalanceValue;
     private RecyclerView mRvGroups;
+    private RecyclerView mRvMyInvoices;
+    private RecyclerView mRvLinkedInvoices;
     private ProgressBar mProgressBar;
 
     private User mUser;
@@ -59,9 +62,17 @@ public class DashBoardActivity extends AppCompatActivity {
         mTvBalanceValue = findViewById(R.id.tvBalanceValue);
         mProgressBar = findViewById(R.id.pbLoading);
 
+        RecyclerView.LayoutManager layoutRvGroups = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mRvGroups = findViewById(R.id.rvGroups);
-        RecyclerView.LayoutManager layout = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        mRvGroups.setLayoutManager(layout);
+        mRvGroups.setLayoutManager(layoutRvGroups);
+
+        RecyclerView.LayoutManager layoutRvMyInvoices = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mRvMyInvoices = findViewById(R.id.rvMyInvoices);
+        mRvMyInvoices.setLayoutManager(layoutRvMyInvoices);
+
+        RecyclerView.LayoutManager layoutRvLinkedInvoices = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mRvLinkedInvoices = findViewById(R.id.rvLinkedInvoices);
+        mRvLinkedInvoices.setLayoutManager(layoutRvLinkedInvoices);
 
         mRunThread = true;
         askUserData();
@@ -116,10 +127,22 @@ public class DashBoardActivity extends AppCompatActivity {
         mTvBalanceValue.setText(mUser.getBalance());
 
         GroupAdapter groupAdapter = new GroupAdapter(mUser.getGroupList(), this);
-        mRvGroups.setAdapter(groupAdapter);
         groupAdapter.setClickListener((view, position) -> {
 
         });
+        mRvGroups.setAdapter(groupAdapter);
+
+        InvoiceAdapter myInvocesAdapter = new InvoiceAdapter(mUser.getMyInvoiceList(), this);
+        myInvocesAdapter.setClickListener((view, position) -> {
+
+        });
+        mRvMyInvoices.setAdapter(myInvocesAdapter);
+
+        InvoiceAdapter linkedInvocesAdapter = new InvoiceAdapter(mUser.getLinkedInvoiceList(), this);
+        linkedInvocesAdapter.setClickListener((view, position) -> {
+
+        });
+        mRvLinkedInvoices.setAdapter(linkedInvocesAdapter);
     }
 
 }
