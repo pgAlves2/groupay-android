@@ -15,7 +15,8 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".RegisterCreditCardActivity"></activity>
+        <activity android:name=".DashBoardActivity"></activity>
+        <activity android:name=".RegisterCreditCardActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

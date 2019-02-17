@@ -67,7 +67,7 @@ public class APIController {
             return;
         RequestQueue queue = Volley.newRequestQueue(context);
         StringRequest postRequest = new StringRequest(Request.Method.POST, API_URL + CARDS + ASSOCIATE + user.getId(),
-                response -> handleSuccessMessage(handler, null),
+                response -> handleSuccessMessage(handler, creditCard),
                 error -> handleErrorMessage(handler)
         ) {
             @Override

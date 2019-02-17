@@ -25,6 +25,8 @@ public class User implements Serializable {
     @SerializedName("passworld")
     private String mPassworld;
 
+    private transient CreditCard mCreditCard;
+
     public User() {
     }
 
@@ -82,6 +84,14 @@ public class User implements Serializable {
 
     public void setName(String name) {
         mName = name;
+    }
+
+    public CreditCard getCreditCard() {
+        return mCreditCard;
+    }
+
+    public void setCreditCard(CreditCard creditCard) {
+        mCreditCard = creditCard;
     }
 
     @Override

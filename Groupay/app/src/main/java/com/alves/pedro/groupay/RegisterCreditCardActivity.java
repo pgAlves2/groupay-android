@@ -2,11 +2,11 @@ package com.alves.pedro.groupay;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.alves.pedro.groupay.data.APIController;
 import com.alves.pedro.groupay.model.CreditCard;
 import com.alves.pedro.groupay.model.User;
+import com.alves.pedro.groupay.utils.SharedPreferencesUtils;
 import com.alves.pedro.groupay.utils.Utils;
 
 public class RegisterCreditCardActivity extends AppCompatActivity {
@@ -99,12 +100,26 @@ public class RegisterCreditCardActivity extends AppCompatActivity {
             Utils.hideProgressBar(mProgressBar);
             switch (msg.what) {
                 case APIController.REQUEST_RESULT_OK:
+                    CreditCard creditCard = (CreditCard) msg.obj;
+                    saveDataOnPreferences(mUser, creditCard);
+                    mUser.setCreditCard(creditCard);
+                    Intent dashBoardIntent = new Intent(RegisterCreditCardActivity.this, DashBoardActivity.class);
+                    dashBoardIntent.putExtra(DashBoardActivity.USER_PARAM, mUser);
+                    dashBoardIntent.putExtra(DashBoardActivity.CREDIT_CARD_PARAM, creditCard);
+                    startActivity(dashBoardIntent);
                     break;
                 case APIController.REQUEST_RESULT_ERROR:
+                    Utils.showErrorDialog(getString(R.string.msgErrorOnRegisterUser), RegisterCreditCardActivity.this);
                     break;
                 default:
                     break;
             }
         }
+    }
+
+    private void saveDataOnPreferences(User user, CreditCard creditCard){
+        SharedPreferences sharedPreferences = SharedPreferencesUtils.getSharedPreferences(RegisterCreditCardActivity.this);
+        SharedPreferencesUtils.saveUserPreference(sharedPreferences, user);
+        SharedPreferencesUtils.saveCreditCardPreference(sharedPreferences, creditCard);
     }
 }
