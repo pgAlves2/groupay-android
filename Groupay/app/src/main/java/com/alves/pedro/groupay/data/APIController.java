@@ -39,13 +39,10 @@ public class APIController {
         StringRequest postRequest = new StringRequest(Request.Method.POST, API_URL + USERS + CREATE,
                 response -> {
                     User userResult = GsonUtils.getInstance()
-                                                .fromJson(new String(response.getBytes()), User.class);
+                            .fromJson(new String(response.getBytes()), User.class);
                     handleSuccessMessage(handler, userResult);
                 },
-                error -> {
-                    Log.e("erro", "errpor");
-                    handleErrorMessage(handler);
-                }
+                error -> handleErrorMessage(handler)
         ) {
             @Override
             public byte[] getBody() {

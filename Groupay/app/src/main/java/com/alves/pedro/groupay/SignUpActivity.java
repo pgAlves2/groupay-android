@@ -6,8 +6,10 @@ import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.alves.pedro.groupay.data.APIController;
@@ -16,16 +18,12 @@ import com.alves.pedro.groupay.model.User;
 public class SignUpActivity extends AppCompatActivity {
 
     private EditText mEtName;
-
     private EditText mEtEmail;
-
     private EditText mEtCPF;
-
     private EditText mEtPhone;
-
     private EditText mEtPassworld;
-
     private Button mBtnRegister;
+    private ProgressBar mProgressBar;
 
     private AlertDialog.Builder mBuilder;
 
@@ -41,6 +39,7 @@ public class SignUpActivity extends AppCompatActivity {
         mEtCPF = findViewById(R.id.etCPF);
         mEtPhone = findViewById(R.id.etPhone);
         mEtPassworld = findViewById(R.id.etPassworld);
+        mProgressBar = findViewById(R.id.pbLoading);
 
         mBtnRegister = findViewById(R.id.btnRegister);
         mBtnRegister.setOnClickListener((v) -> registerUser());
@@ -69,6 +68,7 @@ public class SignUpActivity extends AppCompatActivity {
             valid = true;
 
         if (valid) {
+            showProgressBar();
             User user = new User(mEtName.getText().toString(),
                     mEtEmail.getText().toString(),
                     mEtCPF.getText().toString(),
@@ -94,11 +94,20 @@ public class SignUpActivity extends AppCompatActivity {
                 .show();
     }
 
+    private void showProgressBar(){
+        mProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgressBar(){
+        mProgressBar.setVisibility(View.INVISIBLE);
+    }
+
     @SuppressLint("HandlerLeak")
     class UserRegisterHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            hideProgressBar();
             switch (msg.what) {
                 case APIController.REQUEST_RESULT_OK:
                     User user = (User) msg.obj;

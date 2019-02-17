@@ -7,8 +7,14 @@
     <string name="phone">Telefone</string>
     <string name="passworld">Senha</string>
 
+    <string name="cardNumber">Número</string>
+    <string name="cardName">Nome</string>
+    <string name="cardDate">Vencimento</string>
+    <string name="cardCVV">CVV</string>
+
     <string name="userRegister">Criar conta</string>
     <string name="register">Criar</string>
+    <string name="cardRegister">Registrar cartão</string>
 
     <string name="msgErrorName">Nome inválido</string>
     <string name="msgErrorEmail">Email inválido</string>
