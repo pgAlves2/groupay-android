@@ -150,7 +150,11 @@ public class DashBoardActivity extends AppCompatActivity {
 
         InvoiceAdapter linkedInvocesAdapter = new InvoiceAdapter(mUser.getLinkedInvoiceList(), this);
         linkedInvocesAdapter.setClickListener((view, position) -> {
-
+            Invoice invoice = mUser.getLinkedInvoiceList().get(position);
+            Intent invoiceIntent = new Intent(this, InvoiceActivity.class);
+            invoiceIntent.putExtra(InvoiceActivity.INVOICE_PARAM, invoice);
+            invoiceIntent.putExtra(InvoiceActivity.USER_PARAM, mUser);
+            startActivity(invoiceIntent);
         });
         mRvLinkedInvoices.setAdapter(linkedInvocesAdapter);
     }

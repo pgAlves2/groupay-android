@@ -6,6 +6,7 @@ import android.os.Message;
 import android.util.Log;
 
 import com.alves.pedro.groupay.model.CreditCard;
+import com.alves.pedro.groupay.model.Invoice;
 import com.alves.pedro.groupay.model.User;
 import com.alves.pedro.groupay.utils.GsonUtils;
 import com.android.volley.Request;
@@ -22,6 +23,7 @@ public class APIController {
 
     private static final String API_URL = "http://b95d3955.ngrok.io/api/";
     private static final String USERS = "users/";
+    private static final String INVOICES = "invoices/";
     private static final String CARDS = "cards/";
     private static final String ASSOCIATE = "associate/";
     private static final String CREATE = "create";
@@ -104,6 +106,29 @@ public class APIController {
             }
         };
         queue.add(getRequest);
+    }
+
+    public void updateInvoice(Invoice invoice, Context context, Handler handler) {
+        if (invoice == null || invoice.getId() == null)
+            return;
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest postRequest = new StringRequest(Request.Method.PUT, API_URL + INVOICES + invoice.getId(),
+                response -> handleSuccessMessage(handler, invoice),
+                error -> handleErrorMessage(handler)
+        ) {
+            @Override
+            public byte[] getBody() {
+                String userJson = GsonUtils.getInstance().toJson(invoice);
+                Log.e("PUT", userJson);
+                return userJson.getBytes();
+            }
+
+            @Override
+            public Map<String, String> getHeaders() {
+                return getHeadersParam();
+            }
+        };
+        queue.add(postRequest);
     }
 
     private void handleSuccessMessage(Handler handler, Object obj) {
