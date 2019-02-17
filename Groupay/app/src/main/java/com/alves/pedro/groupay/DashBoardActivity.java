@@ -100,10 +100,19 @@ public class DashBoardActivity extends AppCompatActivity {
             switch (msg.what) {
                 case APIController.REQUEST_RESULT_OK:
                     User userAux = (User) msg.obj;
-                    if (!mUser.getMyInvoiceList().equals(userAux.getMyInvoiceList()) ||
-                        !mUser.getLinkedInvoiceList().equals(userAux.getLinkedInvoiceList()))
+
+                    if (mUser.getMyInvoiceList() != null &&
+                            userAux.getMyInvoiceList() != null
+                            && !mUser.getMyInvoiceList().equals(userAux.getMyInvoiceList()))
                         Snackbar.make(mRvLinkedInvoices, getString(R.string.newInvoice), Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
+
+                    if (mUser.getLinkedInvoiceList() != null &&
+                            userAux.getLinkedInvoiceList() != null
+                            && !mUser.getLinkedInvoiceList().equals(userAux.getLinkedInvoiceList()))
+                        Snackbar.make(mRvLinkedInvoices, getString(R.string.newInvoice), Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+
                     mUser = userAux;
                     mUser.setCreditCard(mCreditCard);
                     loadUserData();
