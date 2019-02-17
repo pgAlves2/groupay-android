@@ -17,6 +17,8 @@ public class GroupListActivity extends AppCompatActivity {
 
     public static final String GROUP_OUT_PARAM = "GROUP_OUT_PARAM";
 
+    public static final int REQUEST_GROUP = 1;
+
     private User mUser;
 
     private RecyclerView mRvGroups;
@@ -36,11 +38,10 @@ public class GroupListActivity extends AppCompatActivity {
         mRvGroups.setLayoutManager(layoutRvGroups);
 
         FloatingActionButton fabAddGroup = findViewById(R.id.fabAddGroup);
-        fabAddGroup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //start
-            }
+        fabAddGroup.setOnClickListener(v -> {
+            Intent groupRegisterIntent = new Intent(this, GroupRegisterActivity.class);
+            groupRegisterIntent.putExtra(GroupRegisterActivity.USER_PARAM, mUser);
+            startActivityForResult(groupRegisterIntent, REQUEST_GROUP);
         });
     }
 

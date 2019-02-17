@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -98,7 +99,12 @@ public class DashBoardActivity extends AppCompatActivity {
             Utils.hideProgressBar(mProgressBar);
             switch (msg.what) {
                 case APIController.REQUEST_RESULT_OK:
-                    mUser = (User) msg.obj;
+                    User userAux = (User) msg.obj;
+                    if (!mUser.getMyInvoiceList().equals(userAux.getMyInvoiceList()) ||
+                        !mUser.getLinkedInvoiceList().equals(userAux.getLinkedInvoiceList()))
+                        Snackbar.make(mRvLinkedInvoices, getString(R.string.newInvoice), Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    mUser = userAux;
                     mUser.setCreditCard(mCreditCard);
                     loadUserData();
                     break;

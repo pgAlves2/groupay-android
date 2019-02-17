@@ -28,6 +28,8 @@
     <string name="register">Criar</string>
     <string name="cardRegister">Registrar cartão</string>
 
+    <string name="newInvoice">Uma nova conta chegou para você</string>
+
     <string name="divideInvoice">Dividir conta</string>
     <string name="payInvoice">Pagar conta</string>
     <string name="managePayment">Visualizar o pagamento</string>

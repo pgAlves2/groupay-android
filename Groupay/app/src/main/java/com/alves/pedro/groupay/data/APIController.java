@@ -24,7 +24,7 @@ public class APIController {
 
     private static final String API_URL = "http://b95d3955.ngrok.io/api/";
     private static final String USERS = "users/";
-    private static final String GROUP = "groups/";
+    private static final String GROUPS = "groups/";
     private static final String USER = "user/";
     private static final String INVOICES = "invoices/";
     private static final String CARDS = "cards/";
@@ -174,15 +174,15 @@ public class APIController {
         queue.add(postRequest);
     }
 
-    public void registerUser(Group group, Context context, Handler handler) {
+    public void registerGroup(Group group, Context context, Handler handler) {
         if (group == null)
             return;
         RequestQueue queue = Volley.newRequestQueue(context);
-        StringRequest postRequest = new StringRequest(Request.Method.POST, API_URL + GROUP + CREATE,
+        StringRequest postRequest = new StringRequest(Request.Method.POST, API_URL + GROUPS,
                 response -> {
-                    User userResult = GsonUtils.getInstance()
-                            .fromJson(new String(response.getBytes()), User.class);
-                    handleSuccessMessage(handler, userResult);
+                    Group groupResult = GsonUtils.getInstance()
+                            .fromJson(new String(response.getBytes()), Group.class);
+                    handleSuccessMessage(handler, groupResult);
                 },
                 error -> handleErrorMessage(handler)
         ) {
