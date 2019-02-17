@@ -7,30 +7,30 @@ import java.util.Objects;
 
 public class User implements Serializable {
 
-    @SerializedName("cpf")
-    private String mCPF;
-
-    @SerializedName("passworld")
-    private String mPassworld;
+    @SerializedName("name")
+    private String mName;
 
     @SerializedName("email")
     private String mEmail;
 
+    @SerializedName("cpf")
+    private String mCPF;
+
     @SerializedName("phone")
     private String mPhone;
 
-    @SerializedName("name")
-    private String mName;
+    @SerializedName("passworld")
+    private String mPassworld;
 
     public User() {
     }
 
-    public User(String CPF, String passworld, String email, String phone, String name) {
-        mCPF = CPF;
-        mPassworld = passworld;
-        mEmail = email;
-        mPhone = phone;
+    public User(String name, String email, String CPF, String phone, String passworld) {
         mName = name;
+        mEmail = email;
+        mCPF = CPF;
+        mPhone = phone;
+        mPassworld = passworld;
     }
 
     public String getCPF() {

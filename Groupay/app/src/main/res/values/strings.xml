@@ -10,4 +10,13 @@
     <string name="userRegister">Criar conta</string>
     <string name="register">Criar</string>
 
+    <string name="msgErrorName">Nome inválido</string>
+    <string name="msgErrorEmail">Email inválido</string>
+    <string name="msgErrorCPF">CPF inválido</string>
+    <string name="msgErrorTelefone">Telefone inválido</string>
+    <string name="msgErrorSenha">Senha inválido</string>
+    <string name="msgErrorOnRegisterUser">Erro ao registrar o usuário</string>
+
+    <string name="msgOk">OK</string>
+
 </resources>

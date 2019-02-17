@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUp">
+    tools:context=".SignUpActivity">
 
     <TextView
         android:id="@+id/tvTitle"
@@ -27,14 +27,14 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvNome"
+            android:id="@+id/tvName"
             android:text="@string/name"
             android:textSize="@dimen/textPatrol"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <EditText
-            android:id="@+id/etNome"
+            android:id="@+id/etName"
             android:textSize="@dimen/textPatrol"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
