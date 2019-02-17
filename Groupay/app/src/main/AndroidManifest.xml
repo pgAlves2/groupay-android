@@ -15,7 +15,8 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".GroupListActivity"></activity>
+        <activity android:name=".ManagePaymentActivity"></activity>
+        <activity android:name=".GroupListActivity" />
         <activity android:name=".InvoiceActivity" />
         <activity android:name=".DashBoardActivity" />
         <activity android:name=".RegisterCreditCardActivity" />

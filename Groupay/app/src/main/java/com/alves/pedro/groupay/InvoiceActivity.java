@@ -33,6 +33,7 @@ public class InvoiceActivity extends AppCompatActivity {
     private ProgressBar mProgressBar;
     private Button mBtnDivideInvoice;
     private Button mBtnPayInvoice;
+    private Button mBtnManagePayments;
 
     private User mUser;
 
@@ -62,6 +63,7 @@ public class InvoiceActivity extends AppCompatActivity {
 
         mProgressBar = findViewById(R.id.pbLoading);
         mBtnDivideInvoice = findViewById(R.id.btnDivideInvoice);
+        mBtnManagePayments = findViewById(R.id.btnManagePayment);
         mBtnPayInvoice = findViewById(R.id.btnPayInvoice);
         mBtnDivideInvoice.setOnClickListener(v -> {
             Intent groupListIntent = new Intent(this, GroupListActivity.class);
@@ -125,9 +127,11 @@ public class InvoiceActivity extends AppCompatActivity {
         if (mInvoice.getGroupID() == null) {
             mBtnDivideInvoice.setVisibility(View.VISIBLE);
             mBtnPayInvoice.setVisibility(View.VISIBLE);
+            mBtnManagePayments.setVisibility(View.GONE);
         }else {
             mBtnDivideInvoice.setVisibility(View.GONE);
             mBtnPayInvoice.setVisibility(View.GONE);
+            mBtnManagePayments.setVisibility(View.VISIBLE);
         }
     }
 }

@@ -28,6 +28,9 @@
 
     <string name="divideInvoice">Dividir conta</string>
     <string name="payInvoice">Pagar conta</string>
+    <string name="managePayment">Gerenciar o pagamento</string>
+
+    <string name="members">Membros</string>
 
     <string name="msgErrorName">Nome inválido</string>
     <string name="msgErrorEmail">Email inválido</string>

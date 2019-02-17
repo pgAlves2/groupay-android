@@ -79,6 +79,14 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btnManagePayment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/managePayment"
+        android:textSize="@dimen/buttonPatrol"
+        app:layout_constraintBottom_toTopOf="@+id/btnPayInvoice" />
+
+    <Button
         android:id="@+id/btnPayInvoice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -92,7 +100,6 @@
         android:layout_height="wrap_content"
         android:text="@string/divideInvoice"
         android:textSize="@dimen/buttonPatrol"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
