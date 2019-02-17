@@ -7,7 +7,7 @@
     tools:context=".InvoiceActivity">
 
     <TextView
-        android:id="@+id/tvGroupName"
+        android:id="@+id/tvInvoiceName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/marginPatrol"
@@ -16,5 +16,73 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/llDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginPatrol"
+        android:layout_marginEnd="@dimen/marginPatrol"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/tvInvoiceName">
+
+        <TextView
+            android:id="@+id/tvInvoiceDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dueDate"
+            android:textSize="@dimen/textPatrol"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvInvoiceDateValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textPatrol"
+            android:textStyle="italic" />
+
+        <View
+            android:id="@+id/divider1"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="15dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintTop_toBottomOf="@id/tvInvoiceDateValue" />
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/status"
+            android:textSize="@dimen/textPatrol"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/divider1" />
+
+        <TextView
+            android:id="@+id/tvStatusValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textPatrol"
+            android:textStyle="italic" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnPayInvoice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/payInvoice"
+        android:textSize="@dimen/buttonPatrol"
+        app:layout_constraintBottom_toTopOf="@id/btnDivideInvoice" />
+
+    <Button
+        android:id="@+id/btnDivideInvoice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/divideInvoice"
+        android:textSize="@dimen/buttonPatrol"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

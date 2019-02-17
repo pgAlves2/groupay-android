@@ -31,10 +31,13 @@ public class Invoice implements Serializable {
     @SerializedName("group")
     private Group mGroup;
 
+    @SerializedName("groupId")
+    private String mGroupID;
+
     public Invoice() {
     }
 
-    public Invoice(String id, String name, boolean paid, String dueDate, String date, double value, User user, Group group) {
+    public Invoice(String id, String name, boolean paid, String dueDate, String date, double value, User user, Group group, String groupID) {
         mId = id;
         mName = name;
         mPaid = paid;
@@ -43,6 +46,7 @@ public class Invoice implements Serializable {
         mValue = value;
         mUser = user;
         mGroup = group;
+        mGroupID = groupID;
     }
 
     public String getId() {
@@ -107,6 +111,14 @@ public class Invoice implements Serializable {
 
     public void setGroup(Group group) {
         mGroup = group;
+    }
+
+    public String getGroupID() {
+        return mGroupID;
+    }
+
+    public void setGroupID(String groupID) {
+        mGroupID = groupID;
     }
 
     @Override

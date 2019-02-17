@@ -57,7 +57,6 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginTop="15dp"
-        android:layout_marginBottom="100dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintTop_toBottomOf="@id/llBalance" />
 
@@ -66,7 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/marginPatrol"
-        android:layout_marginTop="@dimen/marginPatrol"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="@dimen/marginPatrol"
         android:text="@string/groups"
         android:textSize="@dimen/textPatrol"
@@ -84,7 +83,6 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintTop_toBottomOf="@id/rvGroups" />
 
@@ -93,7 +91,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/marginPatrol"
-        android:layout_marginTop="@dimen/marginPatrol"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="@dimen/marginPatrol"
         android:text="@string/myInvoices"
         android:textSize="@dimen/textPatrol"
@@ -111,7 +109,6 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintTop_toBottomOf="@id/rvMyInvoices" />
 
@@ -120,7 +117,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/marginPatrol"
-        android:layout_marginTop="@dimen/marginPatrol"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="@dimen/marginPatrol"
         android:text="@string/likedInvoices"
         android:textSize="@dimen/textPatrol"

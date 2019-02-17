@@ -17,9 +17,17 @@
     <string name="myInvoices">Minhas contas</string>
     <string name="likedInvoices">Contas que participo</string>
 
+    <string name="dueDate">Data de vencimento</string>
+    <string name="status">Status</string>
+    <string name="paid">Pago</string>
+    <string name="notPaid">Não pago</string>
+
     <string name="userRegister">Criar conta</string>
     <string name="register">Criar</string>
     <string name="cardRegister">Registrar cartão</string>
+
+    <string name="divideInvoice">Dividir conta</string>
+    <string name="payInvoice">Pagar conta</string>
 
     <string name="msgErrorName">Nome inválido</string>
     <string name="msgErrorEmail">Email inválido</string>
