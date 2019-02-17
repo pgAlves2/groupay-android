@@ -15,7 +15,8 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".GroupRegisterActivity"></activity>
+        <activity android:name=".PickMemberActivity"></activity>
+        <activity android:name=".GroupRegisterActivity" />
         <activity
             android:name=".ManagePaymentActivity"
             android:configChanges="orientation|screenSize" />
