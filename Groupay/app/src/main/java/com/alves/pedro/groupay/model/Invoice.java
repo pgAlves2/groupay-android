@@ -17,10 +17,10 @@ public class Invoice implements Serializable {
     private boolean mPaid;
 
     @SerializedName("dueDate")
-    private long mDueDate;
+    private String mDueDate;
 
     @SerializedName("date")
-    private long mDate;
+    private String mDate;
 
     @SerializedName("value")
     private double mValue;
@@ -34,7 +34,7 @@ public class Invoice implements Serializable {
     public Invoice() {
     }
 
-    public Invoice(String id, String name, boolean paid, long dueDate, long date, double value, User user, Group group) {
+    public Invoice(String id, String name, boolean paid, String dueDate, String date, double value, User user, Group group) {
         mId = id;
         mName = name;
         mPaid = paid;
@@ -69,19 +69,19 @@ public class Invoice implements Serializable {
         mPaid = paid;
     }
 
-    public long getDueDate() {
+    public String getDueDate() {
         return mDueDate;
     }
 
-    public void setDueDate(long dueDate) {
+    public void setDueDate(String dueDate) {
         mDueDate = dueDate;
     }
 
-    public long getDate() {
+    public String getDate() {
         return mDate;
     }
 
-    public void setDate(long date) {
+    public void setDate(String date) {
         mDate = date;
     }
 
