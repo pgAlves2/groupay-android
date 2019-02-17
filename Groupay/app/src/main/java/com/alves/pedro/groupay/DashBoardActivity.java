@@ -36,9 +36,10 @@ public class DashBoardActivity extends AppCompatActivity {
         if (mUser == null || mCreditCard == null)
             return;
 
+        mUser.setCreditCard(mCreditCard);
+
         TextView tvUserName = findViewById(R.id.tvUserName);
         tvUserName.setText(mUser.getName());
-        Log.e("T", mUser.getCreditCard()+"");
 
     }
 }

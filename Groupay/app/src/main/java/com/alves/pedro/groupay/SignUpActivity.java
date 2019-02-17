@@ -84,6 +84,7 @@ public class SignUpActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             Utils.hideProgressBar(mProgressBar);
+            mBtnRegister.setEnabled(true);
             switch (msg.what) {
                 case APIController.REQUEST_RESULT_OK:
                     User user = (User) msg.obj;

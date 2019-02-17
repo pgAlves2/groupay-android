@@ -98,11 +98,11 @@ public class RegisterCreditCardActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             Utils.hideProgressBar(mProgressBar);
+            mBtnRegister.setEnabled(true);
             switch (msg.what) {
                 case APIController.REQUEST_RESULT_OK:
                     CreditCard creditCard = (CreditCard) msg.obj;
                     saveDataOnPreferences(mUser, creditCard);
-                    mUser.setCreditCard(creditCard);
                     Intent dashBoardIntent = new Intent(RegisterCreditCardActivity.this, DashBoardActivity.class);
                     dashBoardIntent.putExtra(DashBoardActivity.USER_PARAM, mUser);
                     dashBoardIntent.putExtra(DashBoardActivity.CREDIT_CARD_PARAM, creditCard);
