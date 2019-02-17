@@ -129,6 +129,26 @@ public class APIController {
         queue.add(getRequest);
     }
 
+    public void getUser(String userId, Context context, Handler handler) {
+        if (userId == null)
+            return;
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest getRequest = new StringRequest(Request.Method.GET, API_URL + USERS + userId,
+                response -> {
+                    User userResult = GsonUtils.getInstance()
+                            .fromJson(new String(response.getBytes()), User.class);
+                    handleSuccessMessage(handler, userResult);
+                },
+                error -> handleErrorMessage(handler)
+        ) {
+            @Override
+            public Map<String, String> getHeaders() {
+                return getHeadersParam();
+            }
+        };
+        queue.add(getRequest);
+    }
+
     public void updateInvoice(Invoice invoice, Context context, Handler handler) {
         if (invoice == null || invoice.getId() == null)
             return;

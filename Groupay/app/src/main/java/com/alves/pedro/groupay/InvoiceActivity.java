@@ -26,6 +26,7 @@ public class InvoiceActivity extends AppCompatActivity {
     public static final String USER_PARAM = "USER_PARAM";
 
     private static final int REQUEST_GROUP = 1;
+    private static final int REQUEST_MANAGMENT = 2;
 
     private TextView mTvInvoiceName;
     private TextView mTvInvoiceDateValue;
@@ -63,27 +64,37 @@ public class InvoiceActivity extends AppCompatActivity {
 
         mProgressBar = findViewById(R.id.pbLoading);
         mBtnDivideInvoice = findViewById(R.id.btnDivideInvoice);
-        mBtnManagePayments = findViewById(R.id.btnManagePayment);
-        mBtnPayInvoice = findViewById(R.id.btnPayInvoice);
         mBtnDivideInvoice.setOnClickListener(v -> {
             Intent groupListIntent = new Intent(this, GroupListActivity.class);
             groupListIntent.putExtra(GroupListActivity.USER_PARAM, mUser);
             startActivityForResult(groupListIntent, REQUEST_GROUP);
         });
-        loadData();
 
+        mBtnManagePayments = findViewById(R.id.btnManagePayment);
+        mBtnManagePayments.setOnClickListener(v -> {
+            Intent managePaymentIntent = new Intent(this, ManagePaymentActivity.class);
+            managePaymentIntent.putExtra(ManagePaymentActivity.USER_PARAM, mUser);
+            managePaymentIntent.putExtra(ManagePaymentActivity.INVOICE_PARAM, mInvoice);
+            startActivityForResult(managePaymentIntent, REQUEST_MANAGMENT);
+        });
+
+        mBtnPayInvoice = findViewById(R.id.btnPayInvoice);
         mBtnPayInvoice.setOnClickListener(v -> {
             Utils.showProgressBar(mProgressBar);
             mBtnPayInvoice.setEnabled(false);
             APIController.getInstance().payInvoiceCard(mInvoice, mUser, this, mHandler);
         });
+
+        loadData();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (data == null)
             return;
-        if (requestCode == REQUEST_GROUP && resultCode == RESULT_OK) {
+        if (resultCode != RESULT_OK)
+            return;
+        if (requestCode == REQUEST_GROUP) {
             if (data.hasExtra(GroupListActivity.GROUP_OUT_PARAM)) {
                 Utils.showProgressBar(mProgressBar);
 
@@ -91,6 +102,9 @@ public class InvoiceActivity extends AppCompatActivity {
                 mInvoice.setGroupID(group.getId());
                 APIController.getInstance().updateInvoice(mInvoice, this, mHandler);
             }
+        } else if (requestCode == REQUEST_MANAGMENT) {
+            Utils.showProgressBar(mProgressBar);
+            APIController.getInstance().getInvoice(mInvoice, InvoiceActivity.this, mHandler);
         }
     }
 
@@ -104,11 +118,10 @@ public class InvoiceActivity extends AppCompatActivity {
             switch (msg.what) {
                 case APIController.REQUEST_RESULT_OK:
                     if (msg.obj == null) {
+                        Utils.showProgressBar(mProgressBar);
                         APIController.getInstance().getInvoice(mInvoice, InvoiceActivity.this, mHandler);
-                        Log.e("t", "null");
-                    }else {
+                    } else {
                         mInvoice = (Invoice) msg.obj;
-                        Log.e("t", mInvoice.getName());
                         loadData();
                     }
                     break;
@@ -128,7 +141,7 @@ public class InvoiceActivity extends AppCompatActivity {
             mBtnDivideInvoice.setVisibility(View.VISIBLE);
             mBtnPayInvoice.setVisibility(View.VISIBLE);
             mBtnManagePayments.setVisibility(View.GONE);
-        }else {
+        } else {
             mBtnDivideInvoice.setVisibility(View.GONE);
             mBtnPayInvoice.setVisibility(View.GONE);
             mBtnManagePayments.setVisibility(View.VISIBLE);

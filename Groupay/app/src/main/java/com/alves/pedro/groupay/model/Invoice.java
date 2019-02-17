@@ -3,6 +3,7 @@ package com.alves.pedro.groupay.model;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 public class Invoice implements Serializable {
@@ -33,6 +34,9 @@ public class Invoice implements Serializable {
 
     @SerializedName("groupId")
     private String mGroupID;
+
+    @SerializedName("splitPayments")
+    private List<Split> mSplitList;
 
     public Invoice() {
     }
@@ -119,6 +123,14 @@ public class Invoice implements Serializable {
 
     public void setGroupID(String groupID) {
         mGroupID = groupID;
+    }
+
+    public List<Split> getSplitList() {
+        return mSplitList;
+    }
+
+    public void setSplitList(List<Split> splitList) {
+        mSplitList = splitList;
     }
 
     @Override

@@ -15,13 +15,27 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".ManagePaymentActivity"></activity>
-        <activity android:name=".GroupListActivity" />
-        <activity android:name=".InvoiceActivity" />
-        <activity android:name=".DashBoardActivity" />
-        <activity android:name=".RegisterCreditCardActivity" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".ManagePaymentActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".GroupListActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".InvoiceActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".DashBoardActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".RegisterCreditCardActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".SignUpActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
