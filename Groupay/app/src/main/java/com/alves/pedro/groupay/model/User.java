@@ -23,7 +23,7 @@ public class User implements Serializable {
     @SerializedName("phone")
     private String mPhone;
 
-    @SerializedName("passworld")
+    @SerializedName("password")
     private String mPassworld;
 
     @SerializedName("balance")
