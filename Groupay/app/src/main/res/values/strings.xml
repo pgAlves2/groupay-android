@@ -11,7 +11,7 @@
     <string name="cardName">Nome</string>
     <string name="cardDate">Vencimento</string>
     <string name="cardCVV">CVV</string>
-    
+
     <string name="balance">Saldo</string>
     <string name="groups">Grupos</string>
     <string name="myInvoices">Minhas contas</string>

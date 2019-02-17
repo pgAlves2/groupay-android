@@ -107,6 +107,7 @@ public class RegisterCreditCardActivity extends AppCompatActivity {
                     dashBoardIntent.putExtra(DashBoardActivity.USER_PARAM, mUser);
                     dashBoardIntent.putExtra(DashBoardActivity.CREDIT_CARD_PARAM, creditCard);
                     startActivity(dashBoardIntent);
+                    finish();
                     break;
                 case APIController.REQUEST_RESULT_ERROR:
                     Utils.showErrorDialog(getString(R.string.msgErrorOnRegisterCreditCard), RegisterCreditCardActivity.this);

@@ -1,6 +1,7 @@
 package com.alves.pedro.groupay;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
@@ -15,6 +16,7 @@ import com.alves.pedro.groupay.adapter.GroupAdapter;
 import com.alves.pedro.groupay.adapter.InvoiceAdapter;
 import com.alves.pedro.groupay.data.APIController;
 import com.alves.pedro.groupay.model.CreditCard;
+import com.alves.pedro.groupay.model.Invoice;
 import com.alves.pedro.groupay.model.User;
 import com.alves.pedro.groupay.utils.SharedPreferencesUtils;
 import com.alves.pedro.groupay.utils.Utils;
@@ -73,14 +75,18 @@ public class DashBoardActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutRvLinkedInvoices = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mRvLinkedInvoices = findViewById(R.id.rvLinkedInvoices);
         mRvLinkedInvoices.setLayoutManager(layoutRvLinkedInvoices);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         mRunThread = true;
         askUserData();
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onPause() {
+        super.onPause();
         mRunThread = false;
     }
 
@@ -134,7 +140,10 @@ public class DashBoardActivity extends AppCompatActivity {
 
         InvoiceAdapter myInvocesAdapter = new InvoiceAdapter(mUser.getMyInvoiceList(), this);
         myInvocesAdapter.setClickListener((view, position) -> {
-
+            Invoice invoice = mUser.getMyInvoiceList().get(position);
+            Intent invoiceIntent = new Intent(this, InvoiceActivity.class);
+            invoiceIntent.putExtra(InvoiceActivity.INVOICE_PARAM, invoice);
+            startActivity(invoiceIntent);
         });
         mRvMyInvoices.setAdapter(myInvocesAdapter);
 
