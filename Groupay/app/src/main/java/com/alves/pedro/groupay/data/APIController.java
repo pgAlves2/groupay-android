@@ -6,6 +6,7 @@ import android.os.Message;
 import android.util.Log;
 
 import com.alves.pedro.groupay.model.CreditCard;
+import com.alves.pedro.groupay.model.Group;
 import com.alves.pedro.groupay.model.Invoice;
 import com.alves.pedro.groupay.model.User;
 import com.alves.pedro.groupay.utils.GsonUtils;
@@ -23,6 +24,7 @@ public class APIController {
 
     private static final String API_URL = "http://b95d3955.ngrok.io/api/";
     private static final String USERS = "users/";
+    private static final String GROUP = "groups/";
     private static final String USER = "user/";
     private static final String INVOICES = "invoices/";
     private static final String CARDS = "cards/";
@@ -161,6 +163,33 @@ public class APIController {
             public byte[] getBody() {
                 String userJson = GsonUtils.getInstance().toJson(invoice);
                 Log.e("PUT", userJson);
+                return userJson.getBytes();
+            }
+
+            @Override
+            public Map<String, String> getHeaders() {
+                return getHeadersParam();
+            }
+        };
+        queue.add(postRequest);
+    }
+
+    public void registerUser(Group group, Context context, Handler handler) {
+        if (group == null)
+            return;
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest postRequest = new StringRequest(Request.Method.POST, API_URL + GROUP + CREATE,
+                response -> {
+                    User userResult = GsonUtils.getInstance()
+                            .fromJson(new String(response.getBytes()), User.class);
+                    handleSuccessMessage(handler, userResult);
+                },
+                error -> handleErrorMessage(handler)
+        ) {
+            @Override
+            public byte[] getBody() {
+                String userJson = GsonUtils.getInstance().toJson(group);
+                Log.e("POST", userJson);
                 return userJson.getBytes();
             }
 

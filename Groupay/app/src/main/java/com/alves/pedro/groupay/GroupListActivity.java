@@ -1,10 +1,12 @@
 package com.alves.pedro.groupay;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.alves.pedro.groupay.adapter.GroupAdapter;
 import com.alves.pedro.groupay.model.User;
@@ -32,6 +34,14 @@ public class GroupListActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutRvGroups = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRvGroups = findViewById(R.id.rvGroups);
         mRvGroups.setLayoutManager(layoutRvGroups);
+
+        FloatingActionButton fabAddGroup = findViewById(R.id.fabAddGroup);
+        fabAddGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //start
+            }
+        });
     }
 
     @Override
