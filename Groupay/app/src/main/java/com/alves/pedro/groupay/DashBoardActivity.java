@@ -143,6 +143,7 @@ public class DashBoardActivity extends AppCompatActivity {
             Invoice invoice = mUser.getMyInvoiceList().get(position);
             Intent invoiceIntent = new Intent(this, InvoiceActivity.class);
             invoiceIntent.putExtra(InvoiceActivity.INVOICE_PARAM, invoice);
+            invoiceIntent.putExtra(InvoiceActivity.USER_PARAM, mUser);
             startActivity(invoiceIntent);
         });
         mRvMyInvoices.setAdapter(myInvocesAdapter);
