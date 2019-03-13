@@ -58,7 +58,7 @@ public class SplitAdapter extends RecyclerView.Adapter<SplitAdapter.SplitViewHol
         final TextView userValue;
         final CheckBox paid;
 
-        SplitViewHolder(View view) {
+        SplitViewHolder(View view){
             super(view);
             userName = view.findViewById(R.id.tvItemName);
             userValue = view.findViewById(R.id.tvItemValue);
